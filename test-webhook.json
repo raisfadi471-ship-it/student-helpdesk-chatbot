@@ -1,0 +1,20 @@
+{
+  "responseId": "test-response-123",
+  "queryResult": {
+    "queryText": "What is web development?",
+    "parameters": {},
+    "allRequiredParamsPresent": true,
+    "fulfillmentText": "🌐 Web Development Course:\n\n✅ What you'll learn:\n- HTML, CSS, JavaScript (Frontend)\n- React.js & Modern UI frameworks\n- Node.js & Express (Backend)\n- MongoDB/PostgreSQL databases\n- REST APIs & Authentication\n- Deployment & DevOps basics\n\n⏱ Duration: 12 weeks\n💰 Fee: Contact admin for pricing\n📚 Certification: Provided upon completion\n\nWould you like to enroll or have questions?",
+    "intent": {
+      "name": "projects/student-helpdesk/agent/intents/web-dev-intent",
+      "displayName": "WebDevelopmentIntent"
+    },
+    "intentDetectionConfidence": 0.95,
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "source": "facebook",
+    "payload": {}
+  },
+  "session": "projects/student-helpdesk/agent/sessions/test-session-123"
+}

@@ -1,0 +1,127 @@
+{
+  "intents": [
+    {
+      "displayName": "Default Welcome Intent",
+      "priority": 500000,
+      "trainingPhrases": [
+        "Hi",
+        "Hello",
+        "Hey",
+        "Good morning",
+        "Good afternoon",
+        "Greetings"
+      ],
+      "responses": [
+        "Hello! 👋 Welcome to the Student Helpdesk! I can help you with information about our courses: Web Development, Networking, AI Chatbot Development, and Cybersecurity. What would you like to know?"
+      ]
+    },
+    {
+      "displayName": "WebDevelopmentIntent",
+      "priority": 500000,
+      "trainingPhrases": [
+        "What is web development?",
+        "Tell me about web development",
+        "I want to learn web development",
+        "Web development course details",
+        "What will I learn in web development?",
+        "Web dev course",
+        "Frontend and backend development",
+        "Full stack development course"
+      ],
+      "responses": [
+        "🌐 Web Development Course:\n\n✅ What you'll learn:\n- HTML, CSS, JavaScript (Frontend)\n- React.js & Modern UI frameworks\n- Node.js & Express (Backend)\n- MongoDB/PostgreSQL databases\n- REST APIs & Authentication\n- Deployment & DevOps basics\n\n⏱ Duration: 12 weeks\n💰 Fee: Contact admin for pricing\n📚 Certification: Provided upon completion\n\nWould you like to enroll or have questions?"
+      ]
+    },
+    {
+      "displayName": "NetworkingIntent",
+      "priority": 500000,
+      "trainingPhrases": [
+        "What is networking?",
+        "Tell me about networking course",
+        "I want to learn networking",
+        "Network administration",
+        "CCNA course",
+        "Cisco networking",
+        "TCP/IP protocols",
+        "Routing and switching"
+      ],
+      "responses": [
+        "🌐 Networking Course:\n\n✅ What you'll learn:\n- Network Fundamentals (OSI Model, TCP/IP)\n- Routing & Switching (Cisco)\n- Network Security basics\n- VLAN, DHCP, DNS configuration\n- Wireless networking\n- CCNA Certification preparation\n\n⏱ Duration: 10 weeks\n💰 Fee: Contact admin for pricing\n📚 Certification: CCNA prep + Course certificate\n\nInterested in enrolling?"
+      ]
+    },
+    {
+      "displayName": "AIChatbotIntent",
+      "priority": 500000,
+      "trainingPhrases": [
+        "What is AI chatbot development?",
+        "Tell me about chatbot course",
+        "I want to build chatbots",
+        "AI chatbot training",
+        "Dialogflow course",
+        "NLP and machine learning",
+        "How to create a chatbot?",
+        "Conversational AI"
+      ],
+      "responses": [
+        "🤖 AI Chatbot Development Course:\n\n✅ What you'll learn:\n- Dialogflow & NLP fundamentals\n- Intent recognition & Entity extraction\n- Webhook integration with Node.js\n- Facebook Messenger & WhatsApp integration\n- Machine Learning for chatbots\n- Sentiment analysis & Context handling\n\n⏱ Duration: 8 weeks\n💰 Fee: Contact admin for pricing\n📚 Certification: Provided upon completion\n\nReady to start building intelligent chatbots?"
+      ]
+    },
+    {
+      "displayName": "CybersecurityIntent",
+      "priority": 500000,
+      "trainingPhrases": [
+        "What is cybersecurity?",
+        "Tell me about cybersecurity course",
+        "I want to learn ethical hacking",
+        "Penetration testing course",
+        "Network security",
+        "CEH certification",
+        "Information security",
+        "Cybersecurity training"
+      ],
+      "responses": [
+        "🔒 Cybersecurity Course:\n\n✅ What you'll learn:\n- Ethical Hacking fundamentals\n- Penetration Testing techniques\n- Network Security & Firewalls\n- Web Application Security\n- Cryptography & Encryption\n- Security tools (Kali Linux, Metasploit)\n- CEH (Certified Ethical Hacker) prep\n\n⏱ Duration: 14 weeks\n💰 Fee: Contact admin for pricing\n📚 Certification: CEH prep + Course certificate\n\nWant to become a cybersecurity expert?"
+      ]
+    },
+    {
+      "displayName": "CourseFeeIntent",
+      "priority": 500000,
+      "trainingPhrases": [
+        "How much does it cost?",
+        "What is the fee?",
+        "Course pricing",
+        "How much do I need to pay?",
+        "What are the fees?",
+        "Price details",
+        "Cost of the course"
+      ],
+      "responses": [
+        "💰 Course Fees:\n\n- Web Development: ₹15,000 - ₹20,000\n- Networking: ₹12,000 - ₹18,000\n- AI Chatbot Development: ₹10,000 - ₹15,000\n- Cybersecurity: ₹18,000 - ₹25,000\n\n📌 Note: Fees may vary based on batch and payment plans available.\n\nFor exact pricing and payment options, please contact our admin at: admin@studenthelpdesk.com or call +91-XXXXXXXXXX"
+      ]
+    },
+    {
+      "displayName": "EnrollmentIntent",
+      "priority": 500000,
+      "trainingPhrases": [
+        "How to enroll?",
+        "I want to register",
+        "Sign me up",
+        "Enrollment process",
+        "How to join the course?",
+        "Registration procedure",
+        "I want to enroll"
+      ],
+      "responses": [
+        "📝 Enrollment Process:\n\n1️⃣ Visit our website: www.studenthelpdesk.com\n2️⃣ Fill the registration form\n3️⃣ Choose your preferred course\n4️⃣ Submit required documents (ID proof, photo)\n5️⃣ Make payment (online/offline options available)\n6️⃣ Receive confirmation email\n7️⃣ Join WhatsApp/Telegram group for updates\n\n📧 Email: admissions@studenthelpdesk.com\n📞 Phone: +91-XXXXXXXXXX\n\nNeed help with any step?"
+      ]
+    },
+    {
+      "displayName": "Default Fallback Intent",
+      "priority": 500000,
+      "isFallback": true,
+      "responses": [
+        "I'm sorry, I didn't quite understand that. 🤔\n\nI can help you with:\n✅ Web Development\n✅ Networking\n✅ AI Chatbot Development\n✅ Cybersecurity\n✅ Course fees & enrollment\n\nPlease ask about any of these topics!"
+      ]
+    }
+  ]
+}

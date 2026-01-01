@@ -1,0 +1,362 @@
+===============================================
+COMPLETE SETUP STEPS - Student Helpdesk Chatbot
+===============================================
+
+✅ ALREADY DONE:
+- Node.js dependencies installed
+- Server code ready (server.js)
+- .env configured with your Supabase credentials
+- Server running on http://localhost:3000
+
+❌ TODO: Follow these steps in order
+
+===============================================
+STEP 1: CREATE SUPABASE TABLE (5 minutes)
+===============================================
+
+1. Go to: https://supabase.com
+2. Sign in with your account
+3. Open your project: ybamcfaewowecawkixya
+4. Click "SQL Editor" in left menu
+5. Click "New Query"
+6. Copy ALL text from this file:
+   C:\Users\Ghost\Desktop\studentbot\database\supabase-schema.sql
+7. Paste into SQL Editor
+8. Click "Run" button
+9. You should see: "Success. No rows returned"
+10. Click "Table Editor" in left menu
+11. Verify "conversations" table exists with columns:
+    - id
+    - student_message
+    - bot_reply
+    - intent_name
+    - platform
+    - created_at
+
+✅ DONE when you see the conversations table
+
+===============================================
+STEP 2: DOWNLOAD & SETUP NGROK (3 minutes)
+===============================================
+
+1. Go to: https://ngrok.com/download
+2. Click "Download for Windows"
+3. Sign up for free account (or skip)
+4. Download ngrok.zip
+5. Extract the ZIP file
+6. Copy ngrok.exe to: C:\Users\Ghost\Desktop\studentbot\
+7. Open NEW PowerShell terminal in studentbot folder
+8. Run: .\ngrok.exe http 3000
+9. You'll see output like:
+
+   Session Status: online
+   Forwarding: https://abcd-1234-5678.ngrok-free.app -> http://localhost:3000
+
+10. COPY the HTTPS URL (https://abcd-1234-5678.ngrok-free.app)
+11. KEEP this terminal window open (don't close it)
+
+✅ DONE when you have the ngrok HTTPS URL copied
+
+===============================================
+STEP 3: CREATE DIALOGFLOW AGENT (10 minutes)
+===============================================
+
+1. Go to: https://dialogflow.cloud.google.com
+2. Sign in with Google account
+3. Click "Create Agent"
+4. Fill in:
+   - Agent name: StudentHelpdeskBot
+   - Default language: English
+   - Default time zone: Your timezone
+5. Click "CREATE"
+
+✅ Agent created
+
+===============================================
+STEP 4: CONFIGURE WEBHOOK IN DIALOGFLOW
+===============================================
+
+1. In Dialogflow, click "Fulfillment" in left menu
+2. Toggle "Webhook" to ENABLED
+3. In "URL" field, paste your ngrok URL + /webhook
+   Example: https://abcd-1234-5678.ngrok-free.app/webhook
+4. Scroll down and click "SAVE"
+5. Wait for "Webhook saved successfully" message
+
+✅ Webhook configured
+
+===============================================
+STEP 5: CREATE INTENTS IN DIALOGFLOW (15 minutes)
+===============================================
+
+Open file: C:\Users\Ghost\Desktop\studentbot\dialogflow\intents-training-phrases.json
+For reference to copy training phrases and responses.
+
+--- CREATE INTENT 1: WebDevelopmentIntent ---
+1. Click "Intents" in left menu → Click "+"
+2. Intent name: WebDevelopmentIntent
+3. Training phrases section → Click "Add Training Phrases"
+4. Add these (one per line):
+   - What is web development?
+   - Tell me about web development
+   - I want to learn web development
+   - Web development course details
+   - What will I learn in web development?
+   - Web dev course
+   - Frontend and backend development
+   - Full stack development course
+5. Responses section → Add this response:
+   🌐 Web Development Course:
+
+   ✅ What you'll learn:
+   - HTML, CSS, JavaScript (Frontend)
+   - React.js & Modern UI frameworks
+   - Node.js & Express (Backend)
+   - MongoDB/PostgreSQL databases
+   - REST APIs & Authentication
+   - Deployment & DevOps basics
+
+   ⏱ Duration: 12 weeks
+   💰 Fee: Contact admin for pricing
+   📚 Certification: Provided upon completion
+
+   Would you like to enroll or have questions?
+
+6. Scroll to bottom → Fulfillment section
+7. Check "Enable webhook call for this intent"
+8. Click "SAVE"
+
+--- CREATE INTENT 2: NetworkingIntent ---
+1. Click "Intents" → Click "+"
+2. Intent name: NetworkingIntent
+3. Training phrases:
+   - What is networking?
+   - Tell me about networking course
+   - I want to learn networking
+   - Network administration
+   - CCNA course
+   - Cisco networking
+   - TCP/IP protocols
+   - Routing and switching
+4. Response:
+   🌐 Networking Course:
+
+   ✅ What you'll learn:
+   - Network Fundamentals (OSI Model, TCP/IP)
+   - Routing & Switching (Cisco)
+   - Network Security basics
+   - VLAN, DHCP, DNS configuration
+   - Wireless networking
+   - CCNA Certification preparation
+
+   ⏱ Duration: 10 weeks
+   💰 Fee: Contact admin for pricing
+   📚 Certification: CCNA prep + Course certificate
+
+   Interested in enrolling?
+
+5. Enable webhook call for this intent
+6. SAVE
+
+--- CREATE INTENT 3: AIChatbotIntent ---
+1. Click "Intents" → Click "+"
+2. Intent name: AIChatbotIntent
+3. Training phrases:
+   - What is AI chatbot development?
+   - Tell me about chatbot course
+   - I want to build chatbots
+   - AI chatbot training
+   - Dialogflow course
+   - NLP and machine learning
+   - How to create a chatbot?
+   - Conversational AI
+4. Response:
+   🤖 AI Chatbot Development Course:
+
+   ✅ What you'll learn:
+   - Dialogflow & NLP fundamentals
+   - Intent recognition & Entity extraction
+   - Webhook integration with Node.js
+   - Facebook Messenger & WhatsApp integration
+   - Machine Learning for chatbots
+   - Sentiment analysis & Context handling
+
+   ⏱ Duration: 8 weeks
+   💰 Fee: Contact admin for pricing
+   📚 Certification: Provided upon completion
+
+   Ready to start building intelligent chatbots?
+
+5. Enable webhook call for this intent
+6. SAVE
+
+--- CREATE INTENT 4: CybersecurityIntent ---
+1. Click "Intents" → Click "+"
+2. Intent name: CybersecurityIntent
+3. Training phrases:
+   - What is cybersecurity?
+   - Tell me about cybersecurity course
+   - I want to learn ethical hacking
+   - Penetration testing course
+   - Network security
+   - CEH certification
+   - Information security
+   - Cybersecurity training
+4. Response:
+   🔒 Cybersecurity Course:
+
+   ✅ What you'll learn:
+   - Ethical Hacking fundamentals
+   - Penetration Testing techniques
+   - Network Security & Firewalls
+   - Web Application Security
+   - Cryptography & Encryption
+   - Security tools (Kali Linux, Metasploit)
+   - CEH (Certified Ethical Hacker) prep
+
+   ⏱ Duration: 14 weeks
+   💰 Fee: Contact admin for pricing
+   📚 Certification: CEH prep + Course certificate
+
+   Want to become a cybersecurity expert?
+
+5. Enable webhook call for this intent
+6. SAVE
+
+--- CREATE INTENT 5: CourseFeeIntent ---
+1. Click "Intents" → Click "+"
+2. Intent name: CourseFeeIntent
+3. Training phrases:
+   - How much does it cost?
+   - What is the fee?
+   - Course pricing
+   - How much do I need to pay?
+   - What are the fees?
+   - Price details
+   - Cost of the course
+4. Response:
+   💰 Course Fees:
+
+   - Web Development: ₹15,000 - ₹20,000
+   - Networking: ₹12,000 - ₹18,000
+   - AI Chatbot Development: ₹10,000 - ₹15,000
+   - Cybersecurity: ₹18,000 - ₹25,000
+
+   📌 Note: Fees may vary based on batch and payment plans available.
+
+   For exact pricing and payment options, please contact our admin at: admin@studenthelpdesk.com or call +91-XXXXXXXXXX
+
+5. Enable webhook call for this intent
+6. SAVE
+
+--- CREATE INTENT 6: EnrollmentIntent ---
+1. Click "Intents" → Click "+"
+2. Intent name: EnrollmentIntent
+3. Training phrases:
+   - How to enroll?
+   - I want to register
+   - Sign me up
+   - Enrollment process
+   - How to join the course?
+   - Registration procedure
+   - I want to enroll
+4. Response:
+   📝 Enrollment Process:
+
+   1️⃣ Visit our website: www.studenthelpdesk.com
+   2️⃣ Fill the registration form
+   3️⃣ Choose your preferred course
+   4️⃣ Submit required documents (ID proof, photo)
+   5️⃣ Make payment (online/offline options available)
+   6️⃣ Receive confirmation email
+   7️⃣ Join WhatsApp/Telegram group for updates
+
+   📧 Email: admissions@studenthelpdesk.com
+   📞 Phone: +91-XXXXXXXXXX
+
+   Need help with any step?
+
+5. Enable webhook call for this intent
+6. SAVE
+
+✅ All intents created
+
+===============================================
+STEP 6: TEST THE CHATBOT
+===============================================
+
+1. In Dialogflow, find "Try it now" panel on right side
+2. Type: "What is web development?"
+3. Check response appears
+4. Type: "Tell me about networking"
+5. Type: "What is cybersecurity?"
+6. Type: "How much does it cost?"
+
+✅ If responses appear, chatbot is working!
+
+===============================================
+STEP 7: VERIFY DATA SAVED IN SUPABASE
+===============================================
+
+1. Go back to Supabase dashboard
+2. Click "Table Editor"
+3. Click "conversations" table
+4. You should see rows with your test messages
+
+✅ If data appears, everything is connected!
+
+===============================================
+STEP 8: INTEGRATE FACEBOOK MESSENGER (Optional)
+===============================================
+
+1. In Dialogflow, click "Integrations" in left menu
+2. Find "Facebook Messenger" → Click it
+3. Follow the setup wizard:
+   - Create Facebook App at https://developers.facebook.com
+   - Create Facebook Page
+   - Get Page Access Token and verify token
+   - Enter in Dialogflow
+   - Click "START"
+
+===============================================
+STEP 9: INTEGRATE WHATSAPP (Optional - Advanced)
+===============================================
+
+WhatsApp requires Business API access:
+1. Apply at: https://www.twilio.com/whatsapp
+   OR: https://www.messagebird.com/whatsapp
+2. Get approved for WhatsApp Business API
+3. Configure webhook URL in provider dashboard
+4. Connect to Dialogflow
+
+===============================================
+TROUBLESHOOTING
+===============================================
+
+Server not starting?
+→ Make sure .env file has correct Supabase credentials
+
+Webhook not working?
+→ Make sure ngrok is running
+→ Make sure webhook URL in Dialogflow includes /webhook at end
+
+Supabase error?
+→ Make sure you ran the SQL schema in Step 1
+
+Dialogflow not responding?
+→ Make sure "Enable webhook call" is checked for each intent
+
+===============================================
+YOUR CURRENT STATUS
+===============================================
+
+✅ Server running on port 3000
+✅ Supabase credentials configured
+❌ Need to create Supabase table (Step 1)
+❌ Need to download ngrok (Step 2)
+❌ Need to setup Dialogflow (Steps 3-5)
+❌ Need to test (Step 6)
+
+===============================================
+START WITH STEP 1!
+===============================================

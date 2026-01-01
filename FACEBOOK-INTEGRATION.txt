@@ -1,0 +1,231 @@
+===============================================
+FACEBOOK MESSENGER INTEGRATION GUIDE
+===============================================
+
+Connect your Dialogflow chatbot to Facebook Messenger so users can interact with it on Facebook.
+
+===============================================
+PREREQUISITES
+===============================================
+
+✅ Dialogflow agent created and working
+✅ Webhook configured and running
+✅ ngrok URL active: https://unattributable-clark-muckily.ngrok-free.dev/webhook
+✅ Facebook account (personal or business)
+
+===============================================
+STEP 1: CREATE FACEBOOK PAGE (5 minutes)
+===============================================
+
+You need a Facebook Page (not personal profile) to use Messenger integration.
+
+1. Go to: https://www.facebook.com/pages/create
+2. Click "Get Started"
+3. Choose page type: "Business or Brand"
+4. Enter page details:
+   - Page name: "Student Helpdesk Bot" (or your choice)
+   - Category: "Education" or "Educational Consultant"
+   - Description: "AI-powered student helpdesk for course information"
+5. Click "Create Page"
+6. Skip profile/cover photo setup (you can do this later)
+7. Keep the page tab open - you'll need it
+
+===============================================
+STEP 2: CREATE FACEBOOK APP (10 minutes)
+===============================================
+
+1. Go to: https://developers.facebook.com/apps
+2. Click "Create App"
+3. Select "Business" as app type → Click "Next"
+4. Fill in app details:
+   - App name: "Student Helpdesk Chatbot"
+   - App contact email: your-email@gmail.com
+   - Business Account: Leave blank (or select if you have one)
+5. Click "Create App"
+6. You'll be taken to the app dashboard
+
+===============================================
+STEP 3: ADD MESSENGER TO YOUR APP
+===============================================
+
+1. In app dashboard, scroll down to "Add Products to Your App"
+2. Find "Messenger" and click "Set Up"
+3. Scroll to "Access Tokens" section
+4. Click "Add or Remove Pages"
+5. Select your "Student Helpdesk Bot" page
+6. Authorize the permissions
+7. You'll see your page listed with "Generate Token" button
+8. Click "Generate Token"
+9. **IMPORTANT: Copy this token** (starts with EAAxxxxxxxxx)
+10. Save it somewhere safe - you'll need it
+
+===============================================
+STEP 4: CONNECT DIALOGFLOW TO MESSENGER
+===============================================
+
+1. Go to Dialogflow: https://dialogflow.cloud.google.com
+2. Select your agent: "StudentHelpdeskBot"
+3. Click "Integrations" in left menu
+4. Find "Facebook Messenger" integration
+5. Click the toggle to enable it
+6. Fill in the required fields:
+
+   **Verify Token:** 
+   - Create a random string (e.g., "studenthelpdesk123")
+   - Copy it and save it - you'll need it in Step 5
+
+   **Page Access Token:**
+   - Paste the token you copied in Step 3 (starts with EAAxxxxxxxxx)
+
+7. Click "START"
+8. You'll see "Callback URL" - **COPY THIS URL**
+   (It looks like: https://bots.dialogflow.com/facebook/xxxxxxx/webhook)
+
+===============================================
+STEP 5: CONFIGURE WEBHOOK IN FACEBOOK APP
+===============================================
+
+1. Go back to Facebook Developers: https://developers.facebook.com/apps
+2. Select your app
+3. Click "Messenger" in left menu → "Settings"
+4. Scroll to "Webhooks" section
+5. Click "Add Callback URL"
+6. Fill in:
+   - **Callback URL:** Paste the URL from Dialogflow (Step 4)
+   - **Verify Token:** Enter the verify token you created in Step 4
+7. Click "Verify and Save"
+8. You should see "Complete" status
+
+9. Click "Add Subscriptions"
+10. Select these checkboxes:
+    ☑ messages
+    ☑ messaging_postbacks
+    ☑ messaging_optins
+11. Click "Save"
+
+===============================================
+STEP 6: SUBSCRIBE APP TO PAGE
+===============================================
+
+1. Still in Facebook app dashboard → Messenger → Settings
+2. Scroll to "Webhooks" section (where your page is listed)
+3. Find your page name
+4. Click "Subscribe" button next to it
+5. It should show "Subscribed" status
+
+===============================================
+STEP 7: TEST YOUR MESSENGER BOT
+===============================================
+
+Method 1: Test via Facebook Page
+1. Go to your Facebook Page
+2. Click "Send Message" button
+3. Type: "Hi"
+4. You should get the welcome message from your bot!
+5. Try: "I want to register for Web Development"
+6. Follow the prompts
+
+Method 2: Test via Messenger App
+1. Open Facebook Messenger app or messenger.com
+2. Search for your page name: "Student Helpdesk Bot"
+3. Start a conversation
+4. Test the registration flow
+
+===============================================
+TROUBLESHOOTING
+===============================================
+
+Problem: Bot doesn't respond on Messenger
+Solution:
+- Check Dialogflow Integrations → Facebook Messenger is enabled
+- Verify webhook subscription in Facebook app
+- Check page access token is correct
+- Make sure your page is published (not draft)
+
+Problem: "This Page Can't Be Displayed"
+Solution:
+- The callback URL from Dialogflow must be exact
+- Verify token must match exactly (case-sensitive)
+
+Problem: Bot responds but registration doesn't work
+Solution:
+- Your ngrok webhook must still be running
+- Dialogflow fulfillment webhook URL must be correct
+- Check server logs for errors
+
+Problem: Email not sent
+Solution:
+- Check spam/junk folder
+- Verify EMAIL_USER and EMAIL_PASSWORD in .env are correct
+- Check server logs for email sending errors
+
+===============================================
+MAKING YOUR PAGE PUBLIC
+===============================================
+
+By default, your bot only works for you (page admin).
+
+To make it public:
+1. Go to Facebook Developers → Your App
+2. Click "App Review" in left menu
+3. Click "Permissions and Features"
+4. Find "pages_messaging" permission
+5. Click "Request Advanced Access"
+6. Fill in the required information
+7. Submit for review
+
+Note: For testing, you can add test users:
+- Facebook Developers → Roles → Roles
+- Add testers with their Facebook accounts
+
+===============================================
+IMPORTANT NOTES
+===============================================
+
+✅ Keep your ngrok running (webhook needs to be accessible)
+✅ Keep your Node.js server running
+✅ Page Access Token expires - you may need to regenerate it
+✅ For production, replace ngrok with a permanent domain (Heroku, AWS, etc.)
+✅ Facebook may require app review for public access
+✅ Test thoroughly before making page public
+
+===============================================
+VERIFICATION CHECKLIST
+===============================================
+
+Before going live:
+☐ Dialogflow agent tested in console
+☐ Webhook responding correctly
+☐ Database saving registrations
+☐ Emails being sent
+☐ Facebook Messenger integration enabled in Dialogflow
+☐ Facebook app webhook subscribed to page
+☐ Test conversation on Messenger works
+☐ Registration flow works on Messenger
+☐ Email confirmation received after Messenger registration
+
+===============================================
+YOUR CURRENT SETUP
+===============================================
+
+Webhook URL: https://unattributable-clark-muckily.ngrok-free.dev/webhook
+Server: Running on port 3000
+Database: Supabase (working)
+Email: Gmail SMTP (configured)
+Facebook Page: (You need to create)
+Facebook App: (You need to create)
+
+===============================================
+NEXT STEPS AFTER FACEBOOK
+===============================================
+
+For WhatsApp integration:
+- Similar process using WhatsApp Business API
+- Requires business verification
+- Can use Twilio for easier setup
+
+For web widget:
+- Dialogflow provides embeddable chat widget
+- Add to your website with simple HTML code
+
+===============================================

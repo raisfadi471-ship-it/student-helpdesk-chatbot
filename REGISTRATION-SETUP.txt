@@ -1,0 +1,215 @@
+===============================================
+COURSE REGISTRATION SETUP GUIDE
+===============================================
+
+STEP 1: CREATE REGISTRATION TABLE IN SUPABASE
+===============================================
+
+1. Go to Supabase Dashboard: https://supabase.com/dashboard
+2. Open your project
+3. Click "SQL Editor" in left menu
+4. Click "New Query"
+5. Copy and paste this SQL:
+
+CREATE TABLE student_registrations (
+  id BIGSERIAL PRIMARY KEY,
+  student_name VARCHAR(255) NOT NULL,
+  student_email VARCHAR(255) NOT NULL,
+  student_phone VARCHAR(50),
+  course_name VARCHAR(255) NOT NULL,
+  registration_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  status VARCHAR(50) DEFAULT 'pending'
+);
+
+CREATE INDEX idx_registrations_email ON student_registrations(student_email);
+CREATE INDEX idx_registrations_course ON student_registrations(course_name);
+CREATE INDEX idx_registrations_date ON student_registrations(registration_date DESC);
+
+6. Click "RUN"
+7. Verify in "Table Editor" → "student_registrations" table exists
+
+===============================================
+STEP 2: CREATE ENTITIES IN DIALOGFLOW
+===============================================
+
+Go to Dialogflow → Click "Entities" in left menu
+
+--- Create Entity 1: @course-name ---
+1. Click "+" to create entity
+2. Entity name: course-name
+3. Add these entries (one per line):
+   - Web Development
+   - Networking
+   - AI Chatbot Development
+   - Cybersecurity
+4. Click "SAVE"
+
+--- Create Entity 2: @student-name ---
+1. Click "+" to create entity
+2. Entity name: student-name
+3. Check "Allow automated expansion"
+4. Add sample entries:
+   - John
+   - Sarah
+   - Ahmed
+5. Click "SAVE"
+
+--- Create Entity 3: @student-email ---
+1. Click "+" to create entity
+2. Entity name: student-email
+3. Check "Allow automated expansion"
+4. Check "Define synonyms" = OFF
+5. Add sample entries:
+   - john@example.com
+   - sarah@example.com
+6. Click "SAVE"
+
+--- Create Entity 4: @student-phone ---
+1. Click "+" to create entity
+2. Entity name: student-phone
+3. Check "Allow automated expansion"
+4. Add sample entries:
+   - +91-9876543210
+   - 9876543210
+5. Click "SAVE"
+
+===============================================
+STEP 3: CREATE REGISTRATION INTENT
+===============================================
+
+1. Click "Intents" → Click "+"
+2. Intent name: RegisterCourseIntent
+
+3. TRAINING PHRASES (Add these):
+   - I want to register for Web Development my name is John my email is john@example.com phone +91-9876543210
+   - Register me for Networking course my name is Sarah email sarah@example.com
+   - I want to enroll in Cybersecurity my name is Ahmed my email is ahmed@email.com my phone is 1234567890
+   - Register for AI Chatbot Development name John Doe email johndoe@gmail.com phone 9876543210
+   - Sign me up for Web Development my name is Ali email ali@test.com phone +91-1234567890
+
+4. ACTION AND PARAMETERS:
+   Click "ADD PARAMETER"
+   
+   Parameter 1:
+   - Required: ✅ (checked)
+   - Parameter name: student-name
+   - Entity: @student-name
+   - Value: $student-name
+   - Prompt: "What is your name?"
+   
+   Parameter 2:
+   - Required: ✅ (checked)
+   - Parameter name: student-email
+   - Entity: @student-email
+   - Value: $student-email
+   - Prompt: "What is your email address?"
+   
+   Parameter 3:
+   - Required: ❌ (not checked)
+   - Parameter name: student-phone
+   - Entity: @student-phone
+   - Value: $student-phone
+   - Prompt: "What is your phone number? (Optional)"
+   
+   Parameter 4:
+   - Required: ✅ (checked)
+   - Parameter name: course-name
+   - Entity: @course-name
+   - Value: $course-name
+   - Prompt: "Which course would you like to register for? We offer: Web Development, Networking, AI Chatbot Development, Cybersecurity"
+
+5. RESPONSES (optional, webhook will override):
+   "Thank you! Processing your registration..."
+
+6. FULFILLMENT:
+   - Scroll to bottom
+   - Check ☑️ "Enable webhook call for this intent"
+   
+7. Click "SAVE"
+
+===============================================
+STEP 4: TEST REGISTRATION FLOW
+===============================================
+
+In Dialogflow "Try it now" panel:
+
+Test 1: Complete information
+Type: "I want to register for Web Development my name is John my email is john@example.com phone 9876543210"
+
+Expected response:
+✅ Registration Successful!
+Hello John!
+Your registration for Web Development course has been submitted.
+...
+
+Test 2: Missing information (Dialogflow will ask)
+Type: "I want to register for a course"
+→ Dialogflow asks: "Which course would you like to register for?"
+Type: "Web Development"
+→ Dialogflow asks: "What is your name?"
+Type: "Sarah"
+→ Dialogflow asks: "What is your email address?"
+Type: "sarah@example.com"
+→ Registration completes!
+
+Test 3: Verify in Supabase
+1. Go to Supabase → Table Editor
+2. Click "student_registrations"
+3. You should see your test registration
+
+===============================================
+STEP 5: VIEW REGISTRATIONS
+===============================================
+
+Visit these URLs to view data:
+
+1. All registrations:
+   http://localhost:3000/registrations
+
+2. All conversations:
+   http://localhost:3000/conversations
+
+3. Analytics:
+   http://localhost:3000/analytics
+
+===============================================
+HOW IT WORKS
+===============================================
+
+Student: "I want to register for Web Development my name is John my email is john@example.com phone 9876543210"
+    ↓
+Dialogflow extracts:
+- student-name = "John"
+- student-email = "john@example.com"
+- student-phone = "9876543210"
+- course-name = "Web Development"
+    ↓
+Dialogflow sends to webhook with parameters
+    ↓
+Webhook saves to student_registrations table
+    ↓
+Returns personalized confirmation message
+
+===============================================
+CONVERSATION EXAMPLES
+===============================================
+
+Example 1:
+User: "I want to enroll in Networking"
+Bot: "Which course would you like to register for?"
+User: "Networking"
+Bot: "What is your name?"
+User: "Ali Khan"
+Bot: "What is your email address?"
+User: "ali@example.com"
+Bot: "What is your phone number? (Optional)"
+User: "9876543210"
+Bot: "✅ Registration Successful! Hello Ali Khan! Your registration for Networking..."
+
+Example 2:
+User: "Register me for Cybersecurity my name is Sarah email sarah@test.com"
+Bot: "What is your phone number? (Optional)"
+User: "Skip"
+Bot: "✅ Registration Successful! Hello Sarah! Your registration for Cybersecurity..."
+
+===============================================

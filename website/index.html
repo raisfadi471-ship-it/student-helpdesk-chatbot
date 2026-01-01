@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Helpdesk - Tech Courses</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🎓 Student Helpdesk</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Learn Tech Skills That Matter</h2>
+                <p>Professional courses in Web Development, Networking, AI, and Cybersecurity</p>
+                <a href="#courses" class="btn btn-primary">Explore Courses</a>
+                <p class="chat-prompt">💬 Need help? Chat with our AI assistant!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2 class="section-title">Our Courses</h2>
+            <div class="courses-grid">
+                
+                <!-- Web Development Course -->
+                <div class="course-card">
+                    <div class="course-icon">🌐</div>
+                    <h3>Web Development</h3>
+                    <p class="course-duration">12 weeks</p>
+                    <p class="course-description">
+                        Learn HTML, CSS, JavaScript, React, and Node.js. 
+                        Build modern, responsive web applications from scratch.
+                    </p>
+                    <ul class="course-highlights">
+                        <li>✓ Frontend & Backend</li>
+                        <li>✓ Real Projects</li>
+                        <li>✓ Certificate Included</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="askAboutCourse('Web Development')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Networking Course -->
+                <div class="course-card">
+                    <div class="course-icon">🔌</div>
+                    <h3>Networking</h3>
+                    <p class="course-duration">10 weeks</p>
+                    <p class="course-description">
+                        Master network fundamentals, protocols, and security. 
+                        Prepare for CCNA certification.
+                    </p>
+                    <ul class="course-highlights">
+                        <li>✓ Network Design</li>
+                        <li>✓ CCNA Prep</li>
+                        <li>✓ Hands-on Labs</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="askAboutCourse('Networking')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- AI Chatbot Course -->
+                <div class="course-card">
+                    <div class="course-icon">🤖</div>
+                    <h3>AI Chatbot Development</h3>
+                    <p class="course-duration">8 weeks</p>
+                    <p class="course-description">
+                        Build intelligent chatbots using Dialogflow, NLP, 
+                        and machine learning techniques.
+                    </p>
+                    <ul class="course-highlights">
+                        <li>✓ Dialogflow & NLP</li>
+                        <li>✓ Integration Skills</li>
+                        <li>✓ Real Deployment</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="askAboutCourse('AI Chatbot')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Cybersecurity Course -->
+                <div class="course-card">
+                    <div class="course-icon">🔒</div>
+                    <h3>Cybersecurity</h3>
+                    <p class="course-duration">14 weeks</p>
+                    <p class="course-description">
+                        Learn ethical hacking, penetration testing, and 
+                        security best practices to protect systems.
+                    </p>
+                    <ul class="course-highlights">
+                        <li>✓ Ethical Hacking</li>
+                        <li>✓ Security Tools</li>
+                        <li>✓ Industry Recognized</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="askAboutCourse('Cybersecurity')">
+                        Learn More
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Expert Instructors</h3>
+                    <p>Learn from industry professionals with years of experience</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💻</div>
+                    <h3>Hands-on Projects</h3>
+                    <p>Build real-world projects to strengthen your portfolio</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Job-Ready Skills</h3>
+                    <p>Get skills that employers are actively looking for</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🤝</div>
+                    <h3>24/7 Support</h3>
+                    <p>Get help anytime with our AI-powered chatbot assistant</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get Started Today</h2>
+            <p class="contact-description">
+                Ready to start your learning journey? Chat with our AI assistant 
+                to register for a course or get more information!
+            </p>
+            <div class="contact-buttons">
+                <button class="btn btn-primary" onclick="openChat()">
+                    💬 Chat with AI Assistant
+                </button>
+                <a href="mailto:fadibaloch544@gmail.com" class="btn btn-secondary">
+                    📧 Email Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Student Helpdesk. All rights reserved.</p>
+            <p>Powered by AI Chatbot Technology</p>
+        </div>
+    </footer>
+
+    <!-- Kommunicate Chat Widget Script -->
+    <!-- Replace YOUR_APP_ID with your actual Kommunicate App ID -->
+    <script type="text/javascript">
+        // Helper function to open chat for course queries
+        function askAboutCourse(courseName) {
+            if (window.Kommunicate) {
+                window.Kommunicate.displayKommunicateWidget(true);
+                // Optional: send automatic message
+                setTimeout(() => {
+                    if (window.Kommunicate && window.Kommunicate.sendMessage) {
+                        window.Kommunicate.sendMessage("Tell me about " + courseName);
+                    }
+                }, 500);
+            } else {
+                alert("Chat is loading, please try again in a moment.");
+            }
+        }
+
+        // Helper function to open chat widget
+        function openChat() {
+            if (window.Kommunicate) {
+                window.Kommunicate.displayKommunicateWidget(true);
+            }
+        }
+
+        // Kommunicate Widget Configuration
+        (function(d, m){
+            var kommunicateSettings = {
+                "appId": "2827eece1f34c16073e762a44029438b1", // Replace with your Kommunicate App ID
+                "popupWidget": true,
+                "automaticChatOpenOnNavigation": false,
+                "appName": "Student Helpdesk",
+                "onInit": function() {
+                    console.log("Chat widget loaded successfully!");
+                }
+            };
+            var s = document.createElement("script"); 
+            s.type = "text/javascript"; 
+            s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; 
+            h.appendChild(s);
+            window.kommunicate = m; 
+            m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    </script>
+
+</body>
+</html>
