@@ -201,7 +201,7 @@ app.get('/registrations', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Student Helpdesk Chatbot Webhook running on port ${PORT}`);
   console.log(`📡 Webhook endpoint: http://localhost:${PORT}/webhook`);
   console.log(`💾 Supabase connected: ${process.env.SUPABASE_URL ? 'Yes' : 'No'}`);
